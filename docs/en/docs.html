@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>✈️ Planes in the Sky — Documentation</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,400;0,500;0,700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#060e1e;--card:#0c1628;--border:rgba(255,255,255,0.06);--text1:#e8ecf4;--text2:#8899b4;--text3:#4a5a74;--accent:#fbbf24;--blue:#60a5fa;--green:#34d399;--purple:#a78bfa;--red:#f87171;--fm:'DM Sans',sans-serif;--mono:'JetBrains Mono',monospace}
+html{scroll-behavior:smooth}
+body{font-family:var(--fm);background:var(--bg);color:var(--text2);line-height:1.65;-webkit-font-smoothing:antialiased}
+
+/* Hero */
+.hero{position:relative;min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:60px 24px;overflow:hidden}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 20%,rgba(96,165,250,0.08) 0%,transparent 60%),radial-gradient(ellipse at 80% 80%,rgba(251,191,36,0.04) 0%,transparent 50%)}
+.hero-badge{display:inline-flex;align-items:center;gap:6px;padding:4px 14px;border-radius:20px;background:rgba(251,191,36,0.08);border:1px solid rgba(251,191,36,0.15);font-size:.7rem;font-weight:600;color:var(--accent);margin-bottom:24px;letter-spacing:.04em}
+.hero h1{font-size:clamp(2.4rem,6vw,4.2rem);font-weight:700;color:var(--text1);line-height:1.1;margin-bottom:16px}
+.hero h1 span{color:var(--accent)}
+.hero p{font-size:1.1rem;max-width:560px;margin-bottom:32px;color:var(--text2)}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 24px;border-radius:12px;font-family:var(--fm);font-size:.85rem;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none}
+.btn-primary{background:var(--accent);color:#0a0f1e}.btn-primary:hover{background:#f5c542;transform:translateY(-1px);box-shadow:0 4px 24px rgba(251,191,36,0.2)}
+.btn-ghost{background:rgba(255,255,255,0.04);color:var(--text1);border:1px solid var(--border)}.btn-ghost:hover{background:rgba(255,255,255,0.08);border-color:rgba(255,255,255,0.12)}
+
+/* Nav */
+nav{position:sticky;top:0;z-index:50;background:rgba(6,14,30,0.85);backdrop-filter:blur(16px);border-bottom:1px solid var(--border);padding:0 24px}
+nav .inner{max-width:1000px;margin:0 auto;display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;-ms-overflow-style:none}
+nav .inner::-webkit-scrollbar{display:none}
+nav a{display:block;padding:12px 16px;font-size:.75rem;font-weight:600;color:var(--text3);text-decoration:none;white-space:nowrap;border-bottom:2px solid transparent;transition:all .2s;letter-spacing:.02em}
+nav a:hover,nav a.active{color:var(--text1);border-bottom-color:var(--accent)}
+
+/* Sections */
+.container{max-width:800px;margin:0 auto;padding:0 24px}
+section{padding:80px 0 40px}
+section h2{font-size:1.6rem;font-weight:700;color:var(--text1);margin-bottom:8px}
+section .sub{font-size:.85rem;color:var(--text3);margin-bottom:32px}
+section h3{font-size:1rem;font-weight:700;color:var(--text1);margin:32px 0 8px}
+section p{margin-bottom:16px;font-size:.88rem}
+
+/* Cards */
+.grid{display:grid;gap:12px;margin:24px 0}
+.grid-2{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.grid-3{grid-template-columns:repeat(auto-fit,minmax(200px,1fr))}
+.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px;transition:all .2s}
+.card:hover{border-color:rgba(255,255,255,0.1);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.card-icon{font-size:1.6rem;margin-bottom:8px}
+.card h4{font-size:.85rem;font-weight:700;color:var(--text1);margin-bottom:4px}
+.card p{font-size:.75rem;color:var(--text3);margin:0;line-height:1.5}
+.card .tag{display:inline-block;padding:2px 8px;border-radius:6px;font-size:.6rem;font-weight:600;margin-top:8px}
+.tag-blue{background:rgba(96,165,250,0.1);color:var(--blue)}
+.tag-green{background:rgba(52,211,153,0.1);color:var(--green)}
+.tag-purple{background:rgba(167,139,250,0.1);color:var(--purple)}
+.tag-amber{background:rgba(251,191,36,0.1);color:var(--accent)}
+
+/* Key table */
+.key-table{width:100%;border-collapse:collapse;margin:16px 0}
+.key-table th{text-align:left;font-size:.65rem;font-weight:600;color:var(--text3);padding:8px 12px;border-bottom:1px solid var(--border);text-transform:uppercase;letter-spacing:.06em}
+.key-table td{padding:8px 12px;font-size:.8rem;border-bottom:1px solid rgba(255,255,255,0.02)}
+.key-table tr:hover{background:rgba(255,255,255,0.01)}
+kbd{display:inline-block;padding:2px 8px;border-radius:6px;background:rgba(255,255,255,0.05);border:1px solid var(--border);font-family:var(--mono);font-size:.72rem;color:var(--text1);font-weight:500}
+
+/* Mode cards */
+.mode-card{display:flex;gap:16px;align-items:flex-start;padding:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;margin-bottom:12px;transition:all .2s}
+.mode-card:hover{border-color:rgba(255,255,255,0.1)}
+.mode-icon{font-size:1.8rem;flex-shrink:0;width:40px;text-align:center}
+.mode-info h4{font-size:.85rem;font-weight:700;color:var(--text1);margin-bottom:2px}
+.mode-info .age{font-size:.65rem;font-weight:600;color:var(--accent);margin-bottom:4px}
+.mode-info p{font-size:.75rem;margin:0;color:var(--text3);line-height:1.5}
+
+/* Shape grid */
+.shape-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin:16px 0}
+.shape-item{text-align:center;padding:12px 8px;border-radius:12px;background:var(--card);border:1px solid var(--border);transition:all .2s}
+.shape-item:hover{border-color:rgba(251,191,36,0.2);background:rgba(251,191,36,0.03)}
+.shape-item .si-icon{font-size:1.4rem;display:block;margin-bottom:4px}
+.shape-item .si-name{font-size:.6rem;font-weight:600;color:var(--text2);text-transform:uppercase;letter-spacing:.04em}
+
+/* Code */
+.code-block{background:rgba(0,0,0,0.3);border:1px solid var(--border);border-radius:10px;padding:14px 18px;font-family:var(--mono);font-size:.72rem;color:var(--green);overflow-x:auto;margin:12px 0;line-height:1.7}
+.code-block .comment{color:var(--text3)}
+
+/* Accordion */
+.accordion{margin:16px 0}
+.acc-item{border:1px solid var(--border);border-radius:10px;margin-bottom:8px;overflow:hidden}
+.acc-header{padding:14px 18px;font-size:.82rem;font-weight:600;color:var(--text1);cursor:pointer;display:flex;justify-content:space-between;align-items:center;transition:background .2s}
+.acc-header:hover{background:rgba(255,255,255,0.02)}
+.acc-header::after{content:'▸';color:var(--text3);transition:transform .2s}
+.acc-item.open .acc-header::after{transform:rotate(90deg)}
+.acc-body{max-height:0;overflow:hidden;transition:max-height .3s ease}
+.acc-item.open .acc-body{max-height:800px}
+.acc-body-inner{padding:0 18px 14px;font-size:.78rem;color:var(--text3);line-height:1.6}
+
+/* Stats bar */
+.stats-bar{display:flex;gap:24px;flex-wrap:wrap;margin:24px 0;padding:20px;background:var(--card);border:1px solid var(--border);border-radius:14px}
+.stat{flex:1;min-width:80px;text-align:center}
+.stat .num{font-size:1.6rem;font-weight:700;color:var(--accent);font-family:var(--mono)}
+.stat .label{font-size:.6rem;font-weight:600;color:var(--text3);text-transform:uppercase;letter-spacing:.06em;margin-top:2px}
+
+/* Footer */
+footer{border-top:1px solid var(--border);padding:40px 24px;text-align:center;font-size:.72rem;color:var(--text3);margin-top:60px}
+
+/* Responsive */
+@media(max-width:600px){
+  .hero h1{font-size:2rem}
+  .grid-2,.grid-3{grid-template-columns:1fr}
+  .stats-bar{gap:12px}
+  .stat .num{font-size:1.2rem}
+  nav a{padding:10px 12px;font-size:.7rem}
+}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="hero-badge">✈️ VERSION 1.0</div>
+  <h1>Planes in the <span>Sky</span></h1>
+  <p>A kid-friendly real-time flight tracker that turns the sky into an interactive classroom. Five modes, nine shapes, micro:bit companion, SDR receiver. One HTML file.</p>
+  <div class="hero-actions">
+    <a href="../index.html" class="btn btn-primary">🚀 Launch App</a>
+    <a href="#quickstart" class="btn btn-ghost">📖 Quick Start</a>
+    <a href="#faq" class="btn btn-ghost">❓ FAQ</a>
+  </div>
+</div>
+
+<nav>
+  <div class="inner">
+    <a href="#quickstart">Quick Start</a>
+    <a href="#modes">Modes</a>
+    <a href="#shapes">Shapes</a>
+    <a href="#features">Features</a>
+    <a href="#keyboard">Keyboard</a>
+    <a href="#sdr">SDR</a>
+    <a href="#microbit">micro:bit</a>
+    <a href="#faq">FAQ</a>
+    <a href="#tech">Technical</a>
+  </div>
+</nav>
+
+<div class="container">
+
+<!-- Stats -->
+<div class="stats-bar">
+  <div class="stat"><div class="num">~150</div><div class="label">KB Total</div></div>
+  <div class="stat"><div class="num">5</div><div class="label">Modes</div></div>
+  <div class="stat"><div class="num">9</div><div class="label">Shapes</div></div>
+  <div class="stat"><div class="num">50</div><div class="label">Countries</div></div>
+  <div class="stat"><div class="num">83</div><div class="label">Airlines</div></div>
+  <div class="stat"><div class="num">0</div><div class="label">Dependencies</div></div>
+</div>
+
+<!-- Quick Start -->
+<section id="quickstart">
+  <h2>Quick Start</h2>
+  <p class="sub">Up and running in 30 seconds</p>
+
+  <div class="grid grid-3">
+    <div class="card"><div class="card-icon">1️⃣</div><h4>Open</h4><p>Open <code>index.html</code> in Chrome, Edge, Safari, or Firefox. No install needed.</p></div>
+    <div class="card"><div class="card-icon">2️⃣</div><h4>Locate</h4><p>Allow GPS access or pick from 10 preset cities (Paris, London, Dubai, Tokyo…)</p></div>
+    <div class="card"><div class="card-icon">3️⃣</div><h4>Explore</h4><p>Tap any plane to discover its airline, country, altitude, speed, and fun facts!</p></div>
+  </div>
+
+  <div class="code-block">
+    <span class="comment"># No build. No install. Just open the file.</span><br>
+    open index.html<br>
+    <span class="comment"># Or drag it into your browser</span>
+  </div>
+</section>
+
+<!-- Modes -->
+<section id="modes">
+  <h2>Five Progressive Modes</h2>
+  <p class="sub">From toddlers tapping planes to teens reading METAR data</p>
+
+  <div class="mode-card"><div class="mode-icon">🌤️</div><div class="mode-info"><h4>Sky Mode</h4><div class="age">Ages 4+</div><p>Beautiful animated sky with parallax, day/night/twilight, layered clouds, shooting stars. Tap planes to see country flags and greetings.</p></div></div>
+
+  <div class="mode-card"><div class="mode-icon">📚</div><div class="mode-info"><h4>Learn Mode</h4><div class="age">Ages 6+</div><p>Callsign labels, altitude & speed comparisons ("faster than a cheetah!"), cultural greetings in native languages, country fun facts with emoji.</p></div></div>
+
+  <div class="mode-card"><div class="mode-icon">📡</div><div class="mode-info"><h4>Pro Mode</h4><div class="age">Ages 10+</div><p>Full radar display with afterglow sweep, heading arrows, distance readouts per plane, range ring labels, SQUAWK alerts, NOTAM panel.</p></div></div>
+
+  <div class="mode-card"><div class="mode-icon">🔬</div><div class="mode-info"><h4>Expert Mode</h4><div class="age">Ages 12+</div><p>Coordinate grid, atmospheric layers, fuel burn, Mach number, contrail prediction, sparkline charts, waypoints, CSV export.</p></div></div>
+
+  <div class="mode-card"><div class="mode-icon">🕌</div><div class="mode-info"><h4>Heritage Mode</h4><div class="age">All Ages</div><p>Islamic Golden Age scholars timeline — 9 scholars linked to flight math in real time. Al-Khwarizmi's algebra, Ibn al-Haytham's optics, Al-Battani's trigonometry.</p></div></div>
+</section>
+
+<!-- Shapes -->
+<section id="shapes">
+  <h2>Nine Aircraft Shapes</h2>
+  <p class="sub">Tap ✏️ or press S to cycle — all procedurally rendered on canvas</p>
+
+  <div class="shape-grid">
+    <div class="shape-item"><span class="si-icon">✈️</span><span class="si-name">Airliner</span></div>
+    <div class="shape-item"><span class="si-icon">🛩️</span><span class="si-name">Fighter</span></div>
+    <div class="shape-item"><span class="si-icon">🛫</span><span class="si-name">Prop</span></div>
+    <div class="shape-item"><span class="si-icon">🚁</span><span class="si-name">Heli</span></div>
+    <div class="shape-item"><span class="si-icon">📄</span><span class="si-name">Paper</span></div>
+    <div class="shape-item"><span class="si-icon">🚀</span><span class="si-name">Rocket</span></div>
+    <div class="shape-item"><span class="si-icon">🐦</span><span class="si-name">Bird</span></div>
+    <div class="shape-item"><span class="si-icon">🛸</span><span class="si-name">UFO</span></div>
+    <div class="shape-item"><span class="si-icon">⭐</span><span class="si-name">Star</span></div>
+  </div>
+
+  <p>Each shape respects altitude-based coloring, night mode adjustments, heritage gold tinting, and country filter opacity. Animated shapes (prop, heli, bird, UFO, rocket, star) run at 60fps.</p>
+</section>
+
+<!-- Features -->
+<section id="features">
+  <h2>Features</h2>
+  <p class="sub">Everything packed into one HTML file</p>
+
+  <div class="grid grid-2">
+    <div class="card"><div class="card-icon">🌅</div><h4>Real Sunrise/Sunset</h4><p>Calculated from your GPS using solar declination. Twilight gradients from purple → rose → amber → gold.</p><span class="tag tag-blue">Visual</span></div>
+
+    <div class="card"><div class="card-icon">🔍</div><h4>Country Search</h4><p>Filter planes by country or airline. Matching planes glow gold, others fade. Shows flags and plane counts.</p><span class="tag tag-green">Interaction</span></div>
+
+    <div class="card"><div class="card-icon">🔊</div><h4>Sound Effects</h4><p>Synthesized tones for tap, mode switch, radar ping. Wind ambience scales with plane count. No audio files.</p><span class="tag tag-blue">Audio</span></div>
+
+    <div class="card"><div class="card-icon">📏</div><h4>Distance Rings</h4><p>Dashed circles at 50, 100, 150 km. Visible in Sky, Learn, Expert, and Heritage modes.</p><span class="tag tag-blue">Visual</span></div>
+
+    <div class="card"><div class="card-icon">🚨</div><h4>Proximity Alert</h4><p>Gold notification when a plane passes within 8 km. Shows airline, altitude, distance. Haptic vibration.</p><span class="tag tag-amber">Alert</span></div>
+
+    <div class="card"><div class="card-icon">📱</div><h4>Gyroscope Parallax</h4><p>Tilt your phone to look around the sky. Stars, clouds, and celestial bodies shift at different depths.</p><span class="tag tag-green">Interaction</span></div>
+
+    <div class="card"><div class="card-icon">🎯</div><h4>Pinch-to-Zoom</h4><p>Mobile pinch or mouse wheel, 0.5× to 3×. Double-tap/click resets view. Zoom indicator appears briefly.</p><span class="tag tag-green">Interaction</span></div>
+
+    <div class="card"><div class="card-icon">🌙</div><h4>Night Sky</h4><p>Twinkling stars, shooting star streaks, moon with craters and glow, navigation lights on aircraft.</p><span class="tag tag-blue">Visual</span></div>
+
+    <div class="card"><div class="card-icon">🎮</div><h4>Demo Mode</h4><p>Simulated flights auto-activate if the API is unreachable. Press D to toggle. Great for offline use.</p><span class="tag tag-purple">System</span></div>
+
+    <div class="card"><div class="card-icon">📊</div><h4>Expert Data</h4><p>Fuel burn, contrail prediction, atmospheric layers, Mach, waypoints, heatmaps, CSV export.</p><span class="tag tag-purple">Data</span></div>
+  </div>
+</section>
+
+<!-- Keyboard -->
+<section id="keyboard">
+  <h2>Keyboard Shortcuts</h2>
+  <p class="sub">Power user controls</p>
+
+  <table class="key-table">
+    <thead><tr><th>Key</th><th>Action</th></tr></thead>
+    <tbody>
+      <tr><td><kbd>1</kbd> – <kbd>5</kbd></td><td>Switch modes (Sky, Learn, Pro, Expert, Heritage)</td></tr>
+      <tr><td><kbd>S</kbd></td><td>Cycle aircraft shape</td></tr>
+      <tr><td><kbd>F</kbd> or <kbd>/</kbd></td><td>Open country search</td></tr>
+      <tr><td><kbd>D</kbd></td><td>Toggle demo mode</td></tr>
+      <tr><td><kbd>+</kbd> / <kbd>-</kbd></td><td>Zoom in / out</td></tr>
+      <tr><td><kbd>R</kbd></td><td>Reset zoom and pan</td></tr>
+      <tr><td><kbd>Esc</kbd></td><td>Close any open panel / clear filter</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- SDR -->
+<section id="sdr">
+  <h2>📡 SDR Receiver</h2>
+  <p class="sub">Receive live ADS-B directly from aircraft — no internet needed</p>
+
+  <div class="grid grid-2">
+    <div class="card"><div class="card-icon">🔌</div><h4>Hardware</h4><p>RTL-SDR Blog V3 or any RTL2832U dongle (~$25). Included antenna works; dedicated 1090 MHz antenna extends range to 300+ km.</p></div>
+    <div class="card"><div class="card-icon">🐍</div><h4>Software</h4><p>Python 3.8+, pyModeS, Flask. Run <code>sdr_receiver.py</code> and connect from the web app.</p></div>
+  </div>
+
+  <div class="code-block">
+    pip install pyModeS flask flask-cors<br>
+    python3 sdr_receiver.py --lat 48.86 --lon 2.35<br>
+    <span class="comment"># Then tap 📡 in the web app → Connect</span>
+  </div>
+
+  <p>Three backends supported: <strong>rtl_adsb</strong> (direct), <strong>dump1090</strong> (network), <strong>SBS/BaseStation</strong> (CSV). Raspberry Pi systemd service file included for permanent deployment.</p>
+  <p>📄 Full instructions: <a href="SDR_GUIDE.md" style="color:var(--blue)">SDR_GUIDE.md</a></p>
+</section>
+
+<!-- micro:bit -->
+<section id="microbit">
+  <h2>🔌 micro:bit Companion</h2>
+  <p class="sub">Turn a BBC micro:bit into a physical control tower</p>
+
+  <div class="grid grid-2">
+    <div class="card"><div class="card-icon">📡</div><h4>LED Radar</h4><p>5×5 grid shows nearby planes as dots. Brightness = altitude. Center dot = you.</p><span class="tag tag-blue">Display</span></div>
+    <div class="card"><div class="card-icon">🧭</div><h4>Compass Pointer</h4><p>Arrow points toward nearest plane using the built-in magnetometer. Tilt to track!</p><span class="tag tag-green">Interactive</span></div>
+    <div class="card"><div class="card-icon">🚨</div><h4>Overhead Alert</h4><p>Expanding ring animation + ascending buzzer chord when a plane is within 8 km.</p><span class="tag tag-amber">Alert</span></div>
+    <div class="card"><div class="card-icon">🔢</div><h4>Plane Counter</h4><p>Big number on the LED matrix. Button B cycles through individual planes.</p><span class="tag tag-blue">Display</span></div>
+  </div>
+
+  <p>Two versions: <strong>MakeCode</strong> (ages 6+) and <strong>MicroPython</strong> (ages 10+). Connected via Web Bluetooth (Chrome/Edge).</p>
+  <p>📄 Full instructions: <a href="MICROBIT_GUIDE.md" style="color:var(--blue)">MICROBIT_GUIDE.md</a></p>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <h2>Frequently Asked Questions</h2>
+  <p class="sub">Quick answers to common questions</p>
+
+  <div class="accordion">
+    <div class="acc-item"><div class="acc-header">Why don't I see any planes?</div><div class="acc-body"><div class="acc-body-inner">The OpenSky API has rate limits (~100 requests/day). Wait a few minutes, or press <kbd>D</kbd> for Demo Mode. Remote or ocean locations naturally have fewer flights. The app auto-switches to Demo Mode after 2 failed API calls.</div></div></div>
+
+    <div class="acc-item"><div class="acc-header">Are these real planes?</div><div class="acc-body"><div class="acc-body-inner">Yes! When connected to OpenSky or SDR, these are real aircraft with real GPS positions, updated every 10–12 seconds. In Demo Mode (gold badge visible), flights are simulated.</div></div></div>
+
+    <div class="acc-item"><div class="acc-header">Does it work offline?</div><div class="acc-body"><div class="acc-body-inner">The app itself loads instantly with no internet. Live data requires a connection (or an SDR dongle). Without internet, Demo Mode activates automatically.</div></div></div>
+
+    <div class="acc-item"><div class="acc-header">Which browsers are supported?</div><div class="acc-body"><div class="acc-body-inner">Chrome, Edge, Safari, and Firefox all work. Web Bluetooth (for micro:bit) requires Chrome or Edge. All features work on mobile.</div></div></div>
+
+    <div class="acc-item"><div class="acc-header">Can I use this in my classroom?</div><div class="acc-body"><div class="acc-body-inner">Absolutely! Lesson ideas: geography (filter by country, discuss flight routes), math (speed × time = distance), science (atmospheric layers, contrails), history (Heritage Mode), engineering (SDR signals). The five modes are a natural lesson progression.</div></div></div>
+
+    <div class="acc-item"><div class="acc-header">Why a single HTML file?</div><div class="acc-body"><div class="acc-body-inner">Simplicity. Teachers can email it, students open it from a USB stick, there's nothing to install. Zero dependencies, zero supply-chain risk, instant loading.</div></div></div>
+
+    <div class="acc-item"><div class="acc-header">Does it track my location?</div><div class="acc-body"><div class="acc-body-inner">Your location is used only to calculate which planes to show and for sunrise/sunset timing. Nothing is stored, tracked, or sent to third parties beyond the OpenSky API query.</div></div></div>
+
+    <div class="acc-item"><div class="acc-header">Can I use both SDR and micro:bit together?</div><div class="acc-body"><div class="acc-body-inner">Yes! The SDR provides data, the web app displays it, and the micro:bit gives you a physical companion. All three work simultaneously.</div></div></div>
+  </div>
+
+  <p style="margin-top:16px">📄 Full FAQ: <a href="FAQ.md" style="color:var(--blue)">FAQ.md</a></p>
+</section>
+
+<!-- Technical -->
+<section id="tech">
+  <h2>Technical Details</h2>
+  <p class="sub">Under the hood</p>
+
+  <div class="grid grid-3">
+    <div class="card"><h4>Rendering</h4><p>Canvas 2D at native DPI. 9 procedural aircraft shapes. 60fps animation loop.</p></div>
+    <div class="card"><h4>Audio</h4><p>Web Audio API. Oscillator-synthesized SFX. No external files.</p></div>
+    <div class="card"><h4>Motion</h4><p>DeviceOrientation API for gyroscope parallax. Pointer drag fallback.</p></div>
+    <div class="card"><h4>Bluetooth</h4><p>Web Bluetooth API for micro:bit UART service.</p></div>
+    <div class="card"><h4>Astronomy</h4><p>Solar declination algorithm for sunrise/sunset/twilight.</p></div>
+    <div class="card"><h4>APIs</h4><p>OpenSky Network (flights), Nominatim (geocoding), Google Fonts.</p></div>
+  </div>
+
+  <h3>File Structure</h3>
+  <div class="code-block">
+    planes-in-the-sky-v1.0/<br>
+    ├── index.html &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># The app (~150 KB)</span><br>
+    ├── README.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Project overview</span><br>
+    ├── CHANGELOG.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Version history</span><br>
+    ├── LICENSE &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># MIT License</span><br>
+    ├── sdr_receiver.py &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># SDR ADS-B receiver</span><br>
+    ├── microbit_planes.py &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># micro:bit (Python)</span><br>
+    ├── microbit_makecode.js &nbsp;&nbsp;<span class="comment"># micro:bit (MakeCode)</span><br>
+    └── docs/<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;├── HELP.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># User guide</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;├── FAQ.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># FAQ</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;├── SDR_GUIDE.md &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># SDR setup</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;├── MICROBIT_GUIDE.md &nbsp;&nbsp;<span class="comment"># micro:bit setup</span><br>
+    &nbsp;&nbsp;&nbsp;&nbsp;└── docs.html &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># This page</span>
+  </div>
+</section>
+
+</div>
+
+<footer>
+  ✈️ Planes in the Sky v1.0 — MIT License — Built with love for curious kids who look up.<br>
+  Data: OpenSky Network · ADS-B decoding: pyModeS · Font: DM Sans
+</footer>
+
+<script>
+// Accordion toggle
+document.querySelectorAll('.acc-header').forEach(h=>{
+  h.addEventListener('click',()=>h.parentElement.classList.toggle('open'))
+});
+// Nav active state on scroll
+const sections=document.querySelectorAll('section[id]');
+const navLinks=document.querySelectorAll('nav a');
+window.addEventListener('scroll',()=>{
+  let current='';
+  sections.forEach(s=>{if(window.scrollY>=s.offsetTop-100)current=s.id});
+  navLinks.forEach(a=>{a.classList.toggle('active',a.getAttribute('href')==='#'+current)});
+});
+</script>
+</body>
+</html>
